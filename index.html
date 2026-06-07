@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Control Recategorizacion Monotributo 2026</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Periodo 01/01/2026 al 30/06/2026</p>
+        <h1>Control Recategorizacion Monotributo</h1>
+        <p class="subhead">Vencimiento recategorizacion: 05/08/2026. Nueva cuota desde: 20/08/2026.</p>
+      </div>
+      <div class="header-actions">
+        <button class="icon-button" id="importButton" title="Importar CSV" aria-label="Importar CSV">
+          <span aria-hidden="true">↥</span>
+        </button>
+        <button class="icon-button" id="exportButton" title="Exportar CSV" aria-label="Exportar CSV">
+          <span aria-hidden="true">↧</span>
+        </button>
+        <button class="primary-button" id="addClientButton">Nuevo cliente</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary-grid" aria-label="Resumen ejecutivo">
+        <article class="metric">
+          <span>Clientes</span>
+          <strong id="metricTotal">0</strong>
+        </article>
+        <article class="metric">
+          <span>Mantienen</span>
+          <strong id="metricKeep">0</strong>
+        </article>
+        <article class="metric warning">
+          <span>Suben</span>
+          <strong id="metricUp">0</strong>
+        </article>
+        <article class="metric info">
+          <span>Bajan</span>
+          <strong id="metricDown">0</strong>
+        </article>
+        <article class="metric danger">
+          <span>Pasan a RI</span>
+          <strong id="metricRi">0</strong>
+        </article>
+        <article class="metric">
+          <span>Diferencia cuotas</span>
+          <strong id="metricDelta">$ 0</strong>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <aside class="control-panel" aria-label="Configuracion y filtros">
+          <div class="panel-block">
+            <h2>Parametros</h2>
+            <label>
+              IPC para estimar junio
+              <div class="input-with-suffix">
+                <input id="ipcInput" type="number" step="0.1" min="0" value="2.3" />
+                <span>%</span>
+              </div>
+            </label>
+            <label>
+              Buscar
+              <input id="searchInput" type="search" placeholder="Razon social o CUIT" />
+            </label>
+            <label>
+              Estado
+              <select id="statusFilter">
+                <option value="all">Todos</option>
+                <option value="mantiene">Mantiene</option>
+                <option value="sube">Sube</option>
+                <option value="baja">Baja</option>
+                <option value="ri">Pasa a RI</option>
+                <option value="revisar">Revisar</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="panel-block">
+            <h2>Acciones</h2>
+            <button class="secondary-button" id="sampleButton">Cargar ejemplo</button>
+            <button class="ghost-button" id="clearButton">Limpiar clientes</button>
+            <input id="csvFileInput" type="file" accept=".csv,text/csv" hidden />
+          </div>
+
+          <div class="panel-note">
+            <strong>Criterios</strong>
+            <p>La app toma la categoria mas alta requerida por ingresos, superficie, energia y alquileres. Si supera categoria K o activa exclusiones, marca pase a Responsable Inscripto.</p>
+          </div>
+        </aside>
+
+        <section class="table-shell" aria-label="Clientes cargados">
+          <div class="table-toolbar">
+            <div>
+              <h2>Clientes</h2>
+              <p id="visibleCount">0 registros visibles</p>
+            </div>
+            <button class="secondary-button" id="addClientButtonInline">Agregar cliente</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>CUIT</th>
+                  <th>Tipo</th>
+                  <th>Cat. actual</th>
+                  <th>Total sem.</th>
+                  <th>Anualizado</th>
+                  <th>Cat. final</th>
+                  <th>Cuota est.</th>
+                  <th>Diferencia</th>
+                  <th>Conclusion</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="clientsBody"></tbody>
+            </table>
+          </div>
+          <div class="empty-state" id="emptyState">
+            <h3>Sin clientes cargados</h3>
+            <p>Agrega un cliente o importa un CSV para empezar el control de recategorizacion.</p>
+          </div>
+        </section>
+      </section>
+
+      <section class="details-band">
+        <div>
+          <h2>Tabla vigente Febrero 2026</h2>
+          <p>Valores base tomados de la planilla Control_Recategorizacion_Monotributo_2026.xlsx.</p>
+        </div>
+        <div class="category-grid" id="categoryGrid"></div>
+      </section>
+    </main>
+
+    <dialog id="clientDialog">
+      <form method="dialog" id="clientForm">
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">Carga de datos</p>
+            <h2 id="dialogTitle">Nuevo cliente</h2>
+          </div>
+          <button class="icon-button" type="button" id="closeDialogButton" aria-label="Cerrar" title="Cerrar">×</button>
+        </div>
+
+        <input type="hidden" id="clientId" />
+        <div class="form-grid">
+          <label>
+            Razon social
+            <input id="nameInput" required />
+          </label>
+          <label>
+            CUIT
+            <input id="cuitInput" inputmode="numeric" />
+          </label>
+          <label>
+            Tipo actividad
+            <select id="typeInput">
+              <option value="S">Servicios</option>
+              <option value="V">Ventas</option>
+            </select>
+          </label>
+          <label>
+            Categoria actual
+            <select id="currentCategoryInput"></select>
+          </label>
+        </div>
+
+        <h3>Facturacion real</h3>
+        <div class="form-grid months">
+          <label>Enero <input id="janInput" type="number" min="0" step="0.01" /></label>
+          <label>Febrero <input id="febInput" type="number" min="0" step="0.01" /></label>
+          <label>Marzo <input id="marInput" type="number" min="0" step="0.01" /></label>
+          <label>Abril <input id="aprInput" type="number" min="0" step="0.01" /></label>
+          <label>Mayo <input id="mayInput" type="number" min="0" step="0.01" /></label>
+          <label>Junio real <input id="junInput" type="number" min="0" step="0.01" placeholder="Estimar" /></label>
+        </div>
+
+        <h3>Parametros y razonabilidad</h3>
+        <div class="form-grid">
+          <label>Superficie afectada (m2) <input id="surfaceInput" type="number" min="0" step="0.01" /></label>
+          <label>Energia anual (Kw) <input id="energyInput" type="number" min="0" step="0.01" /></label>
+          <label>Precio unitario max. ($) <input id="unitPriceInput" type="number" min="0" step="0.01" /></label>
+          <label>Alquiler anual ($) <input id="rentInput" type="number" min="0" step="0.01" /></label>
+          <label>Compras semestre ($) <input id="purchasesInput" type="number" min="0" step="0.01" /></label>
+          <label>Gastos semestre ($) <input id="expensesInput" type="number" min="0" step="0.01" /></label>
+          <label>Cuota actual ($) <input id="currentFeeInput" type="number" min="0" step="0.01" /></label>
+        </div>
+
+        <div class="dialog-actions">
+          <button class="ghost-button" type="button" id="cancelDialogButton">Cancelar</button>
+          <button class="primary-button" id="saveClientButton" type="submit">Guardar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
