@@ -1,19 +1,20 @@
 :root {
   color-scheme: light;
-  --bg: #f5f7f8;
+  --bg: #fbf7fa;
   --surface: #ffffff;
-  --surface-strong: #eef3f1;
-  --ink: #17211f;
-  --muted: #63706c;
-  --line: #dce5e2;
-  --brand: #0f766e;
-  --brand-dark: #115e59;
-  --accent: #c2410c;
+  --surface-strong: #f8edf6;
+  --ink: #343036;
+  --muted: #746b75;
+  --line: #eadbe7;
+  --brand: #9a3f70;
+  --brand-dark: #7f315c;
+  --brand-soft: #f4d5f2;
+  --accent: #d96fd2;
   --danger: #b91c1c;
-  --warning: #b7791f;
-  --info: #2563eb;
+  --warning: #9a650f;
+  --info: #3269a8;
   --radius: 8px;
-  --shadow: 0 16px 40px rgba(17, 24, 39, 0.08);
+  --shadow: 0 16px 40px rgba(77, 54, 73, 0.09);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -43,13 +44,32 @@ button {
   gap: 24px;
   align-items: flex-end;
   padding: 28px clamp(18px, 3vw, 44px) 22px;
-  background: #153b36;
-  color: white;
+  background: #ffffff;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 10px 28px rgba(77, 54, 73, 0.08);
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.brand-logo {
+  width: clamp(78px, 9vw, 112px);
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid var(--brand-soft);
+  box-shadow: 0 12px 28px rgba(154, 63, 112, 0.14);
 }
 
 .eyebrow {
   margin: 0 0 6px;
-  color: #76d1c6;
+  color: var(--brand);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0;
@@ -83,7 +103,7 @@ h3 {
 .subhead {
   max-width: 760px;
   margin-bottom: 0;
-  color: #c9dfdc;
+  color: var(--muted);
 }
 
 .header-actions,
@@ -107,6 +127,7 @@ h3 {
 .primary-button {
   background: var(--brand);
   color: white;
+  box-shadow: 0 8px 20px rgba(154, 63, 112, 0.2);
 }
 
 .primary-button:hover {
@@ -114,7 +135,7 @@ h3 {
 }
 
 .secondary-button {
-  background: var(--surface);
+  background: #fff8fd;
   color: var(--ink);
   border-color: var(--line);
 }
@@ -130,9 +151,9 @@ h3 {
   padding: 0;
   display: inline-grid;
   place-items: center;
-  background: rgba(255, 255, 255, 0.12);
-  color: currentColor;
-  border-color: rgba(255, 255, 255, 0.24);
+  background: #fff8fd;
+  color: var(--brand);
+  border-color: var(--line);
   font-size: 1.25rem;
 }
 
@@ -154,6 +175,11 @@ main {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+}
+
+.metric:first-child {
+  background: #fff3fc;
+  border-color: #efcaeb;
 }
 
 .metric span {
@@ -235,7 +261,7 @@ select {
 
 input:focus,
 select:focus {
-  outline: 2px solid rgba(15, 118, 110, 0.22);
+  outline: 2px solid rgba(217, 111, 210, 0.22);
   border-color: var(--brand);
 }
 
@@ -312,7 +338,7 @@ td {
 
 th {
   background: var(--surface-strong);
-  color: #40504c;
+  color: #5c4b58;
   font-size: 0.76rem;
   text-transform: uppercase;
   letter-spacing: 0;
@@ -334,7 +360,7 @@ td small {
   min-height: 26px;
   padding: 3px 9px;
   border-radius: 999px;
-  background: #e7f5f3;
+  background: #f7def4;
   color: var(--brand-dark);
   font-weight: 800;
   font-size: 0.78rem;
@@ -362,7 +388,7 @@ td small {
 }
 
 .row-actions .icon-button {
-  background: #f6f8f8;
+  background: #fff8fd;
   color: var(--ink);
   border-color: var(--line);
   width: 34px;
@@ -401,7 +427,7 @@ td small {
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #fbfcfc;
+  background: #fffafd;
 }
 
 .category-card strong {
@@ -426,7 +452,7 @@ dialog {
 }
 
 dialog::backdrop {
-  background: rgba(15, 23, 42, 0.45);
+  background: rgba(52, 48, 54, 0.45);
 }
 
 #clientForm {
@@ -444,7 +470,7 @@ dialog::backdrop {
 }
 
 .dialog-head .icon-button {
-  background: #f6f8f8;
+  background: #fff8fd;
   color: var(--ink);
   border-color: var(--line);
 }
@@ -488,6 +514,14 @@ dialog::backdrop {
   .table-toolbar {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .brand-lockup {
+    align-items: flex-start;
+  }
+
+  .brand-logo {
+    width: 74px;
   }
 
   .header-actions {

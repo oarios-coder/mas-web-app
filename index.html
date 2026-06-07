@@ -8,17 +8,20 @@
   </head>
   <body>
     <header class="app-header">
-      <div>
-        <p class="eyebrow">Periodo 01/01/2026 al 30/06/2026</p>
-        <h1>Control Recategorizacion Monotributo</h1>
-        <p class="subhead">Vencimiento recategorizacion: 05/08/2026. Nueva cuota desde: 20/08/2026.</p>
+      <div class="brand-lockup">
+        <img class="brand-logo" src="assets/mas-isologo.png" alt="MAS+ Gestion Contable" />
+        <div>
+          <p class="eyebrow">Periodo 01/01/2026 al 30/06/2026</p>
+          <h1>Control Recategorizacion Monotributo</h1>
+          <p class="subhead">Vencimiento recategorizacion: 05/08/2026. Nueva cuota desde: 20/08/2026.</p>
+        </div>
       </div>
       <div class="header-actions">
         <button class="icon-button" id="importButton" title="Importar CSV" aria-label="Importar CSV">
-          <span aria-hidden="true">↥</span>
+          <span aria-hidden="true">&uarr;</span>
         </button>
         <button class="icon-button" id="exportButton" title="Exportar CSV" aria-label="Exportar CSV">
-          <span aria-hidden="true">↧</span>
+          <span aria-hidden="true">&darr;</span>
         </button>
         <button class="primary-button" id="addClientButton">Nuevo cliente</button>
       </div>
@@ -144,7 +147,7 @@
             <p class="eyebrow">Carga de datos</p>
             <h2 id="dialogTitle">Nuevo cliente</h2>
           </div>
-          <button class="icon-button" type="button" id="closeDialogButton" aria-label="Cerrar" title="Cerrar">×</button>
+          <button class="icon-button" type="button" id="closeDialogButton" aria-label="Cerrar" title="Cerrar">&times;</button>
         </div>
 
         <input type="hidden" id="clientId" />
