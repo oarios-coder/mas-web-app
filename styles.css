@@ -58,7 +58,7 @@ button {
 }
 
 .brand-logo {
-  width: clamp(78px, 9vw, 112px);
+  width: clamp(94px, 10vw, 128px);
   aspect-ratio: 1;
   object-fit: contain;
   border-radius: 50%;
@@ -521,7 +521,7 @@ dialog::backdrop {
   }
 
   .brand-logo {
-    width: 74px;
+    width: 86px;
   }
 
   .header-actions {
