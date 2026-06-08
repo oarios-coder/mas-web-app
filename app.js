@@ -218,20 +218,20 @@ function renderClients() {
   visible.forEach(({ client, result }) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td><strong>${escapeHtml(client.name || "-")}</strong><small>${result.unitPriceWarning ? "Verificar precio unitario" : result.reasonability <= 0 ? "Revisar razonabilidad" : "OK razonabilidad"}</small></td>
-      <td>${escapeHtml(client.cuit || "-")}</td>
-      <td>${client.type === "S" ? "Servicios" : "Ventas"}</td>
-      <td><span class="badge">${client.currentCategory || "-"}</span></td>
-      <td>${money.format(result.semester)}</td>
-      <td>${money.format(result.annualized)}</td>
-      <td><span class="badge ${result.passesRi ? "danger" : ""}">${result.finalCategory}</span></td>
-      <td>${result.estimatedFee ? money.format(result.estimatedFee) : "-"}</td>
-      <td>${typeof result.deltaFee === "number" ? money.format(result.deltaFee) : "-"}</td>
-      <td><span class="badge ${statusClass(result.status)}">${escapeHtml(result.conclusion)}</span></td>
-      <td>
+      <td data-label="Cliente"><strong>${escapeHtml(client.name || "-")}</strong><small>${result.unitPriceWarning ? "Verificar precio unitario" : result.reasonability <= 0 ? "Revisar razonabilidad" : "OK razonabilidad"}</small></td>
+      <td data-label="CUIT">${escapeHtml(client.cuit || "-")}</td>
+      <td data-label="Tipo">${client.type === "S" ? "Servicios" : "Ventas"}</td>
+      <td data-label="Cat. actual"><span class="badge">${client.currentCategory || "-"}</span></td>
+      <td data-label="Total sem.">${money.format(result.semester)}</td>
+      <td data-label="Anualizado">${money.format(result.annualized)}</td>
+      <td data-label="Cat. final"><span class="badge ${result.passesRi ? "danger" : ""}">${result.finalCategory}</span></td>
+      <td data-label="Cuota est.">${result.estimatedFee ? money.format(result.estimatedFee) : "-"}</td>
+      <td data-label="Diferencia">${typeof result.deltaFee === "number" ? money.format(result.deltaFee) : "-"}</td>
+      <td data-label="Conclusion"><span class="badge ${statusClass(result.status)}">${escapeHtml(result.conclusion)}</span></td>
+      <td data-label="Acciones">
         <div class="row-actions">
-          <button class="icon-button" title="Editar" aria-label="Editar" data-action="edit" data-id="${client.id}">✎</button>
-          <button class="icon-button" title="Eliminar" aria-label="Eliminar" data-action="delete" data-id="${client.id}">×</button>
+          <button class="icon-button" title="Editar" aria-label="Editar" data-action="edit" data-id="${client.id}">&#9998;</button>
+          <button class="icon-button" title="Eliminar" aria-label="Eliminar" data-action="delete" data-id="${client.id}">&times;</button>
         </div>
       </td>
     `;

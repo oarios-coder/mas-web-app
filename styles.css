@@ -510,35 +510,222 @@ dialog::backdrop {
 }
 
 @media (max-width: 680px) {
+  body {
+    background: #fffafd;
+  }
+
   .app-header,
   .table-toolbar {
     align-items: stretch;
     flex-direction: column;
   }
 
+  .app-header {
+    gap: 16px;
+    padding: 18px 14px 16px;
+  }
+
   .brand-lockup {
     align-items: flex-start;
+    gap: 12px;
   }
 
   .brand-logo {
-    width: 86px;
+    flex: 0 0 auto;
+    width: 76px;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  h1 {
+    font-size: 1.45rem;
+    line-height: 1.12;
+  }
+
+  .subhead {
+    font-size: 0.88rem;
+    line-height: 1.35;
   }
 
   .header-actions {
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 42px 42px 1fr;
+    width: 100%;
   }
 
   .summary-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 
   .metric {
     min-height: 82px;
+    padding: 13px;
+  }
+
+  .metric strong {
+    font-size: 1.25rem;
+    overflow-wrap: anywhere;
+  }
+
+  main {
+    overflow-x: clip;
+    padding: 14px 10px 28px;
+  }
+
+  .workspace {
+    gap: 12px;
+  }
+
+  .control-panel,
+  .table-shell,
+  .details-band {
+    border-radius: var(--radius);
+    box-shadow: 0 10px 24px rgba(77, 54, 73, 0.07);
+  }
+
+  .control-panel,
+  .details-band {
+    padding: 14px;
+  }
+
+  .table-toolbar {
+    padding: 14px;
+  }
+
+  .table-toolbar .secondary-button,
+  .panel-block button,
+  .dialog-actions button {
+    width: 100%;
+  }
+
+  .table-wrap {
+    overflow: visible;
+  }
+
+  table,
+  tbody,
+  tr,
+  td {
+    display: block;
+    width: 100%;
+  }
+
+  table {
+    min-width: 0;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody {
+    display: grid;
+    gap: 12px;
+    padding: 10px;
+  }
+
+  tr {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(77, 54, 73, 0.06);
+    overflow: hidden;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    white-space: normal;
+    text-align: right;
+  }
+
+  td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    flex: 0 0 96px;
+    font-size: 0.76rem;
+    font-weight: 800;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  td:first-child {
+    display: block;
+    text-align: left;
+    background: #fff6fd;
+  }
+
+  td:first-child::before {
+    display: none;
+  }
+
+  td:last-child {
+    border-bottom: 0;
+  }
+
+  .badge {
+    justify-content: center;
+    max-width: 100%;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .row-actions {
+    flex: 1;
+  }
+
+  .row-actions .icon-button {
+    width: 42px;
+    min-height: 38px;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
   }
 
   .form-grid,
   .months {
     grid-template-columns: 1fr;
+  }
+
+  dialog {
+    width: calc(100vw - 16px);
+    max-height: calc(100dvh - 16px);
+    overflow: auto;
+  }
+
+  #clientForm {
+    padding: 16px;
+  }
+
+  .dialog-head {
+    align-items: center;
+  }
+
+  .dialog-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand-logo {
+    width: 64px;
+  }
+
+  h1 {
+    font-size: 1.28rem;
+  }
+
+  .header-actions {
+    grid-template-columns: 40px 40px 1fr;
   }
 }
